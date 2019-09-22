@@ -10,6 +10,7 @@ import world2 from '../components/world/world2'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/helloworld',
