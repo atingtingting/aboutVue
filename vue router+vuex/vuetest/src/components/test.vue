@@ -11,6 +11,7 @@
 
 <script>
 import axios from 'axios'
+import store from '../vuex/store.js'
 export default {
   name: 'test',
   data () {
@@ -27,7 +28,8 @@ export default {
         .then((response) => {
           // 成功
           console.log(response)
-          that.list = response.data.result
+          this.$store.commit('inCount', response.data.result)
+          that.list = this.$store.state.list
         })
         .catch((error) => {
           // 失败
@@ -35,8 +37,14 @@ export default {
         })
     }
   },
+  store,
   mounted () {
-    this.getData()
+    console.log(this.$store.state.list.length)
+    if (this.$store.state.list.length > 0) {
+      this.list = this.$store.state.list
+    } else {
+      this.getData()
+    }
   }
 }
 </script>
